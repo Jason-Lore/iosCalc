@@ -1,0 +1,81 @@
+body {
+    background-color: black;
+  }
+  
+  .display {
+    color: #D4D4D2;
+    font-size: xx-large;
+    text-align: right;
+  }
+  
+  .numbers {
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 50%;
+    min-width: 20%;
+    float: right;
+  }
+
+  .item {
+    background-color: #1c1c1c;
+    border-radius: 50%;
+    font-size: xx-large;
+    width: 100px; /* Equal width and height */
+    height: 100px; /* Equal width and height */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    margin: 10px; /* Spacing between circles */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+
+  .operations{
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-right: 100px;
+    float: right;
+  }
+
+  .operationSymbols{
+    background-color: #FF9500;
+    border-radius: 50%;
+    font-size: xx-large;
+    width: 100px; /* Equal width and height */
+    height: 100px; /* Equal width and height */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    margin: 10px; /* Spacing between circles */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+
+  .symbol {
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 50%;
+    min-width: 20%;
+    float: right;
+  }
+
+  .symbolitem {
+    background-color: #a1a1a1;
+    border-radius: 50%;
+    font-size: xx-large;
+    width: 100px; /* Equal width and height */
+    height: 100px; /* Equal width and height */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    margin: 10px; /* Spacing between circles */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .item:hover {
+    background-color: #a96300;
+  }

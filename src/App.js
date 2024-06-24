@@ -5,19 +5,19 @@ import { useState, useRef } from 'react'
 import Display from './components/Display';
 import Keyboard from './components/Keyboard';
 
+let primaryNum;
+let secondaryNum;
+let operation;
+
 function App() {
   //Number to be sent to the Display. Should be updated by several components.
-  const [displayNum, setDisplayNum] = useState(1);
+  const [displayNum, setDisplayNum] = useState("0");
   const [currentNum, setCurrentNum] = useState(0);
 
   let artithmatic = (num) => {
     setDisplayNum(currentNum);
     console.log(displayNum);
   }
-
-  let primaryNum;
-  let secondaryNum;
-  let operation;
 
   let artithmaticSymbols = ['÷', 'x', '-', '+', '='];
   let otherSymbols = ['AC', '+/-', '%'];
@@ -27,8 +27,21 @@ function App() {
   let styles = ['light', 'dark', 'orange'];
 
   const incomingSymbol = (inSym) => {
-    setDisplayNum(inSym)
-
+    console.log(primaryNum)
+    if(primaryNum === undefined){
+      primaryNum = inSym;
+      setDisplayNum(primaryNum);
+      console.log('P')
+    } else {
+      secondaryNum = inSym;
+      setDisplayNum(secondaryNum);
+      console.log('S')
+    }
+    if(primaryNum != undefined && secondaryNum != undefined){
+      setDisplayNum(primaryNum + secondaryNum);
+      primaryNum = primaryNum + secondaryNum;
+      console.log('M')
+    }
   };
 
   return (

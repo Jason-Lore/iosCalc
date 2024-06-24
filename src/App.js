@@ -8,15 +8,42 @@ import Keyboard from './components/Keyboard';
 let primaryNum;
 let secondaryNum;
 let operation;
+let isDecimal = false;
+let refreshNum = true;
 
 function App() {
   //Number to be sent to the Display. Should be updated by several components.
-  const [displayNum, setDisplayNum] = useState("0");
+  const [displayNum, setDisplayNum] = useState(0);
   const [currentNum, setCurrentNum] = useState(0);
 
-  let artithmatic = (num) => {
-    setDisplayNum(currentNum);
-    console.log(displayNum);
+  let artithmatic = (operation) => {
+    let ans;
+    switch (operation) {
+      case ('Multiplication'):
+        ans = Number(primaryNum) * Number(secondaryNum)
+        setDisplayNum(ans)
+        primaryNum = (ans)
+        break;
+      case ('Addition'):
+        console.log('test')
+        ans = Number(primaryNum) + Number(secondaryNum)
+        setDisplayNum(ans)
+        primaryNum = (ans)
+        break;
+      case ('Subtraction'):
+        ans = Number(primaryNum) - Number(secondaryNum)
+        setDisplayNum(ans)
+        primaryNum = (ans)
+        break;
+      case ('Division'):
+        ans = Number(primaryNum) / Number(secondaryNum)
+        setDisplayNum(ans)
+        primaryNum = (ans)
+        break;
+      default:
+        console.log('No operation')
+      break;
+    }
   }
 
   let artithmaticSymbols = ['÷', 'x', '-', '+', '='];
@@ -26,34 +53,83 @@ function App() {
 
   let styles = ['light', 'dark', 'orange'];
 
-  const incomingSymbol = (inSym) => {
-    console.log(primaryNum)
-    if(primaryNum === undefined){
-      primaryNum = inSym;
-      setDisplayNum(primaryNum);
-      console.log('P')
+  let setNums = (number) => {
+    if (primaryNum === undefined) {
+      primaryNum = number
     } else {
-      secondaryNum = inSym;
-      setDisplayNum(secondaryNum);
-      console.log('S')
+      secondaryNum = number
+      artithmatic(operation)
+      console.log(`${primaryNum}, ${secondaryNum}, ${operation}`)
     }
-    if(primaryNum != undefined && secondaryNum != undefined){
-      setDisplayNum(primaryNum + secondaryNum);
-      primaryNum = primaryNum + secondaryNum;
-      console.log('M')
+  }
+
+  const incomingSymbol = (inSym) => {
+    switch (inSym) {
+      case("AC"):
+        setNums(0)
+        setDisplayNum(0);
+        primaryNum = undefined;
+        secondaryNum = undefined;
+        operation = undefined;
+        isDecimal = false;
+        inSym = 0;
+        refreshNum = true;
+      break;
+      case ("x"):
+        refreshNum = false;
+        setNums(displayNum)
+        operation = 'Multiplication'
+        break;
+        case ("+/-"):
+          setDisplayNum(displayNum * -1)
+          primaryNum = undefined;
+          secondaryNum = undefined;
+          break;
+      case ("-"):
+        refreshNum = false;
+        setNums(displayNum)
+        operation = 'Subtraction'
+        break;
+      case ("+"):
+        refreshNum = false;
+        setNums(displayNum)
+        operation = 'Addition'
+        break;
+      case ("÷"):
+        refreshNum = false;
+        setNums(displayNum)
+        operation = 'Division'
+        break;
+      case ("="):
+        setNums(displayNum)
+        break;
+      case ("."):
+        if (isDecimal == false) {
+          setDisplayNum(displayNum => displayNum + inSym);
+          isDecimal = true;
+        } else {
+          console.log('Cant add additional decimal points')
+        }
+        break;
+      default:
+        if (displayNum === Number(0) || refreshNum === false) {
+          setDisplayNum('')
+          refreshNum = true;
+        }
+        setDisplayNum(displayNum => displayNum.toString() + inSym.toString());
+        break;
     }
   };
 
   return (
     <div>
       <Display displayNum={displayNum} />
-      <Keyboard style={styles[2]} symbol={artithmaticSymbols} direction={'column'} />
-      <Keyboard style={styles[0]} symbol={otherSymbols} direction={'row'} />
+      <Keyboard style={styles[2]} symbol={artithmaticSymbols} direction={'column'} incomingSymbol={incomingSymbol} />
+      <Keyboard style={styles[0]} symbol={otherSymbols} direction={'row'} incomingSymbol={incomingSymbol} />
       <br />
       <Keyboard style={styles[1]} symbol={numberSymbols} direction={'row'} incomingSymbol={incomingSymbol} />
       <br />
-      <Keyboard style={styles[1]} symbol={extraNumberSymbols} direction={'row'} />
-      <button onClick={artithmatic}>"Do Math I guess"</button>
+      <Keyboard style={styles[1]} symbol={extraNumberSymbols} direction={'row'} incomingSymbol={incomingSymbol} />
     </div>
   );
 }

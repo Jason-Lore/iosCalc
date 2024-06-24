@@ -1,16 +1,18 @@
 import React from "react";
 
-import '../../styles/index.css'; // Import global CSS
+let Keyboard = ({ style, symbol, direction, incomingSymbol}) => {
+    const handleClick = (inSym) => {
+        incomingSymbol(inSym);
+    };
 
-const symbols = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.']
-
-let Keyboard = () => {
     return (
-        <section className="numbers">
-                {symbols.map((symbol, i) =>(
-                    <p className="item" key={i}>{symbol}</p>
-                ))}
-        </section>
+        <div className={`flex ${direction}`}>
+            {symbol.map((symbols, i) => (
+                <div key={`${symbols}${i}`} className={`${style}`}>
+                    <a className="item" key={`${symbols}${i}`} onClick={() => handleClick(symbols)}>{symbols}</a>
+                </div>
+            ))}
+        </div>
     )
 }
 

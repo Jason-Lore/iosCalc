@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 import Display from './components/Display';
 import Keyboard from './components/Keyboard';
@@ -14,7 +13,6 @@ let refreshNum = true;
 function App() {
   //Number to be sent to the Display. Should be updated by several components.
   const [displayNum, setDisplayNum] = useState(0);
-  const [currentNum, setCurrentNum] = useState(0);
 
   let artithmatic = (operation) => {
     let ans;
@@ -48,7 +46,9 @@ function App() {
 
   let artithmaticSymbols = ['÷', 'x', '-', '+', '='];
   let otherSymbols = ['AC', '+/-', '%'];
-  let numberSymbols = [7, 8, 9, 4, 5, 6, 1, 2, 3];
+  let numberSymbols1 = [7, 8, 9];
+  let numberSymbols2 = [4, 5, 6];
+  let numberSymbols3 = [1, 2, 3];
   let extraNumberSymbols = [0, '.']
 
   let styles = ['light', 'dark', 'orange'];
@@ -104,7 +104,7 @@ function App() {
         setNums(displayNum)
         break;
       case ("."):
-        if (isDecimal == false) {
+        if (isDecimal === false) {
           setDisplayNum(displayNum => displayNum + inSym);
           isDecimal = true;
         } else {
@@ -127,7 +127,11 @@ function App() {
       <Keyboard style={styles[2]} symbol={artithmaticSymbols} direction={'column'} incomingSymbol={incomingSymbol} />
       <Keyboard style={styles[0]} symbol={otherSymbols} direction={'row'} incomingSymbol={incomingSymbol} />
       <br />
-      <Keyboard style={styles[1]} symbol={numberSymbols} direction={'row'} incomingSymbol={incomingSymbol} />
+      <Keyboard style={styles[1]} symbol={numberSymbols1} direction={'row'} incomingSymbol={incomingSymbol} />
+      <br />
+      <Keyboard style={styles[1]} symbol={numberSymbols2} direction={'row'} incomingSymbol={incomingSymbol} />
+      <br />
+      <Keyboard style={styles[1]} symbol={numberSymbols3} direction={'row'} incomingSymbol={incomingSymbol} />
       <br />
       <Keyboard style={styles[1]} symbol={extraNumberSymbols} direction={'row'} incomingSymbol={incomingSymbol} />
     </div>

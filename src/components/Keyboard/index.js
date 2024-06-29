@@ -8,9 +8,9 @@ let Keyboard = ({ style, symbol, direction, incomingSymbol }) => {
     return (
         <div className={`flex ${direction}`}>
             {symbol.map((symbols, i) => (
-                <div>
-                    <div key={`${symbols}${i}`} className={`${style}`}>
-                        <a className="item" key={`${symbols}${i}`} onClick={() => handleClick(symbols)}>{symbols}</a>
+                <div onClick={() => handleClick(symbols)}>
+                    <div key={`${symbols}${i}`} className={`${style} border ${symbols === 0 ? 'zero' : ''}`}>
+                        <a className="item" key={`${symbols}${i}`}>{symbols}</a>
                     </div>
                 </div>
             ))}

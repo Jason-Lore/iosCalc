@@ -101,7 +101,10 @@ function App() {
         operation = 'Division'
         break;
       case ("="):
+        refreshNum = true;
         setNums(displayNum)
+        operation = 0;
+        console.log(displayNum)
         break;
       case ("."):
         if (isDecimal === false) {
@@ -122,7 +125,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div style={{width: 599}}>
       <Display displayNum={displayNum} />
       <Keyboard style={styles[2]} symbol={artithmaticSymbols} direction={'column'} incomingSymbol={incomingSymbol} />
       <Keyboard style={styles[0]} symbol={otherSymbols} direction={'row'} incomingSymbol={incomingSymbol} />

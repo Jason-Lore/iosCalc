@@ -1,15 +1,12 @@
 body {
   background-color: black;
   font-size: xx-large;
+  float: right;
 }
 
 .display {
   color: #D4D4D2;
   text-align: right;
-}
-
-.item {
-  text-align: center;
 }
 
 .orange {
@@ -33,4 +30,18 @@ body {
 .column {
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.border {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.zero{
+  border-radius: 50px;
+  width: 200px;
 }
